@@ -32,7 +32,7 @@ SET userUM=Default
 SET /p userUM="|   O que deseja fazer?   |  %TIME:~0, -3%   > "
 
 
-IF %userUM% EQU 1 ( ECHO 1 )
+IF %userUM% EQU 1 ( GOTO origemDestino )
 IF %userUM% EQU 2 ( ECHO 2 )
 
 IF %userUM% EQU A ( ECHO a )
@@ -43,7 +43,7 @@ IF %userUM% EQU b ( ECHO b )
 IF %userUM% EQU 3 ( ECHO 3 )
 IF %userUM% EQU 4 ( ECHO 4 )
 
-:: Clausula ELSE, se as tags acima não forem chamadas.
+:: ELSE...
 COLOR C
 COLOR F
 GOTO menu
@@ -51,7 +51,13 @@ GOTO menu
 
 
 
- 
+:origemDestino
+ECHO Hello world
+PAUSE >nul
+
+
+
+
 :: Finalização do programa. Apenas para maior controle...
 echo [precione qualquer tecla para sair]
 pause >nul
