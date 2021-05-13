@@ -1,5 +1,4 @@
 @ECHO off
-COLOR F
 
 :: Variáveis principais.
 SET origem=%CD%
@@ -12,8 +11,9 @@ SET destino=%CD%
 :menu
 CLS
 TITLE Copiadora de arquivos   I   MENU PRINCIPAL
+COLOR F
 ECHO.
-ECHO     Origem dos arquivos:    [%origem%]
+ECHO     Origem dos  arquivos:   [%origem%]
 ECHO     Destino dos arquivos:   [%destino%]
 ECHO.
 ECHO     Saia a qualquer momento com [Ctrl+C] ou use a espacos vazios como INPUT, e de [ENTER].
@@ -27,6 +27,7 @@ ECHO         - Digite [3] para tomar acao rapidamente (inclui pastas vazias).
 ECHO         - Digite [4] para selecionar quais arquivos e pastas serao selecionados.
 ECHO.
 
+:: --- input ---
 :: Essa linha evita erros em que a variável está vazia.
 SET userUM=Default
 SET /p userUM="|   O que deseja fazer?   |  %TIME:~0, -3%   > "
@@ -51,9 +52,23 @@ GOTO menu
 
 
 
+
 :origemDestino
-ECHO Hello world
-PAUSE >nul
+CLS
+TITLE Copiadora de arquivos   I   ALTERAR A ORIGEM E O DESTINO
+ECHO.
+ECHO     Origem dos  arquivos: [%origem%]
+ECHO     Destino dos arquivos: [%destino%]
+ECHO.
+ECHO         Deixe o campo vazio caso nao queira alterar nada.
+ECHO.
+
+:: --- input ---
+SET /p origem="|   Redefinir a  origem   |  %TIME:~0, -3%   > "
+SET /p destino="|   Redefinir o destino   |  %TIME:~0, -3%   > "
+
+GOTO menu
+
 
 
 
