@@ -10,12 +10,14 @@ SET destino=%CD%
 
 
 :menu
+CLS
 TITLE Copiadora de arquivos   I   MENU PRINCIPAL
 ECHO.
 ECHO     Origem dos arquivos:    [%origem%]
 ECHO     Destino dos arquivos:   [%destino%]
 ECHO.
-ECHO     Saia a qualquer momento com [Ctrl+C] ou use a tecla [ESPACO] como INPUT, e de [ENTER].
+ECHO     Saia a qualquer momento com [Ctrl+C] ou use a espacos vazios como INPUT, e de [ENTER].
+:: Força um erro que faz o programa parar a execução...
 ECHO.
 ECHO         - Digite [1] para alterar a origem e o destino.
 ECHO         - Digite [2] para ver os diretorios e arquivos da origem.
@@ -41,10 +43,8 @@ IF %userUM% EQU b ( ECHO b )
 IF %userUM% EQU 3 ( ECHO 3 )
 IF %userUM% EQU 4 ( ECHO 4 )
 
-
 :: Clausula ELSE, se as tags acima não forem chamadas.
 COLOR C
-CLS
 COLOR F
 GOTO menu
 
