@@ -34,12 +34,12 @@ SET /p userUM="|   O que deseja fazer?   |  %TIME:~0, -3%   > "
 
 
 IF %userUM% EQU 1 ( GOTO origemDestino )
-IF %userUM% EQU 2 ( ECHO 2 )
+IF %userUM% EQU 2 ( GOTO diretoriosArquivos )
 
-IF %userUM% EQU A ( ECHO a )
-IF %userUM% EQU a ( ECHO a )
-IF %userUM% EQU B ( ECHO b )
-IF %userUM% EQU b ( ECHO b )
+IF %userUM% EQU A ( SET userUM=a )
+IF %userUM% EQU B ( SET userUM=b )
+IF %userUM% EQU a ( GOTO diretoriosArquivos )
+IF %userUM% EQU b ( GOTO diretoriosArquivos )
 
 IF %userUM% EQU 3 ( ECHO 3 )
 IF %userUM% EQU 4 ( ECHO 4 )
@@ -64,9 +64,34 @@ ECHO         Deixe o campo vazio caso nao queira alterar nada.
 ECHO.
 
 :: --- input ---
-SET /p origem="|   Redefinir a  origem   |  %TIME:~0, -3%   > "
+SET  /p origem="|   Redefinir a  origem   |  %TIME:~0, -3%   > "
 SET /p destino="|   Redefinir o destino   |  %TIME:~0, -3%   > "
 
+GOTO menu
+
+
+
+
+
+:diretoriosArquivos
+CLS
+COLOR e
+TITLE Copiadora de arquivos   I   MOSTRAR CONTEUDO DA ORIGEM
+
+ECHO.
+ECHO -------------------------------------------------------------------------------
+IF %userUM% EQU 2 (
+	DIR %origem%
+) ELSE (
+	IF %userUM% EQU a (
+		TREE %origem%
+	) ELSE (
+		TREE /f %origem%
+	)
+)
+ECHO ------------------------------------ Precione qualquer tecla para continuar ---
+
+PAUSE >nul
 GOTO menu
 
 
