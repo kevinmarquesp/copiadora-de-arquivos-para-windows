@@ -3,9 +3,6 @@
 :: Variáveis principais.
 SET origem=%CD%
 SET destino=%CD%
-SET pastas=e
-SET arquivos=*
-SET nome=cp%random%
 
 
 
@@ -15,6 +12,11 @@ SET nome=cp%random%
 CLS
 TITLE Copiadora de arquivos   I   MENU PRINCIPAL
 COLOR f
+
+SET pastas=e
+SET arquivos=*
+SET nome=cp%random%
+
 ECHO.
 ECHO     Origem dos  arquivos:   [%origem%]
 ECHO     Destino dos arquivos:   [%destino%]
@@ -47,12 +49,7 @@ IF %userUM% EQU a ( GOTO diretoriosArquivos )
 IF %userUM% EQU b ( GOTO diretoriosArquivos )
 IF %userUM% EQU c ( GOTO diretoriosArquivos )
 
-IF %userUM% EQU 3 (
-	SET pastas=e
-	SET arquivos=*
-	SET nome=cp%random%
-	GOTO copy
-)
+IF %userUM% EQU 3 ( GOTO copy )
 IF %userUM% EQU 4 ( GOTO customCopy )
 
 :: ELSE...
@@ -137,7 +134,7 @@ GOTO menu
 CLS
 COLOR a
 TITLE Copiadora de arquivos   I   COPIANDO
-ROBOCOPY %origem% %destino%/%nome% %arquivos% /%pastas%
+ROBOCOPY %origem% "%destino%/%nome%" %arquivos% /%pastas%
 ECHO ------------------------------------ Precione qualquer tecla para continuar ---
 PAUSE >nul
 GOTO menu
@@ -217,5 +214,11 @@ IF %userTRES% EQU 7 ( SET arquivos=*.html *.htm *.php *.js *.aspx *.css *.cpp *.
 IF %userTRES% EQU 8 ( SET arquivos=*.psd *.indd *.pdf *.svg *.cdr *.ai *.aep *.aepx *.ppj )
 IF %userTRES% EQU 9 ( SET arquivos=*.dll *.reg *.jar *.bat *.vbs )
 IF %userTRES% EQU 10 ( SET arquivos=*.zip *.rar *.tar *.7z )
+IF %userTRES% EQU 11 ( SET /p arquivos="Use os caracteres coringas do Windows para a selecao > " )
 
+
+ECHO.
+ECHO [O nome da pasta de destino foi registrado como %nome%]
+:: --- input ---
+SET /p nome="|   Deseja alterar isso?   |  %TIME:~0, -3%   > "
 GOTO copy
