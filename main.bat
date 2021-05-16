@@ -4,7 +4,8 @@
 SET origem=%CD%
 SET destino=%CD%
 SET pastas=e
-
+SET arquivos=*
+SET nome=cp%random%
 
 
 
@@ -45,7 +46,7 @@ IF %userUM% EQU a ( GOTO diretoriosArquivos )
 IF %userUM% EQU b ( GOTO diretoriosArquivos )
 IF %userUM% EQU c ( GOTO diretoriosArquivos )
 
-IF %userUM% EQU 3 ( GOTO defaultCopy )
+IF %userUM% EQU 3 ( GOTO copy )
 IF %userUM% EQU 4 ( GOTO customCopy )
 
 :: ELSE...
@@ -126,11 +127,11 @@ GOTO menu
 
 
 
-:defaultCopy
+:copy
 CLS
 COLOR a
 TITLE Copiadora de arquivos   I   COPIA PADRAO
-ROBOCOPY %origem% %destino%/cp%random% * /%pastas%
+ROBOCOPY %origem% %destino%/%nome% %arquivos% /%pastas%
 ECHO ------------------------------------ Precione qualquer tecla para continuar ---
 PAUSE >nul
 GOTO menu
@@ -189,3 +190,8 @@ SET /p userTRES="|   Deixe vazio para voltar ao menu...   |  %TIME:~0, -3%   > "
 
 PAUSE >nul
 GOTO menu
+
+
+
+
+
