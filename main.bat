@@ -1,6 +1,5 @@
 @ECHO off
 
-:: Variáveis principais.
 SET origem=%CD%
 SET destino=%CD%
 
@@ -22,7 +21,6 @@ ECHO     Origem dos  arquivos:   [%origem%]
 ECHO     Destino dos arquivos:   [%destino%]
 ECHO.
 ECHO     Saia a qualquer momento com [Ctrl+C] ou use a espacos vazios como INPUT, e de [ENTER].
-:: Força um erro que faz o programa parar a execução...
 ECHO.
 ECHO         - Digite [1] para alterar a origem e o destino.
 ECHO         - Digite [2] para salvar algumas informacoes da origem.
@@ -33,8 +31,6 @@ ECHO         - Digite [3] para tomar acao rapidamente (inclui pastas vazias).
 ECHO         - Digite [4] para selecionar quais arquivos e pastas serao selecionados.
 ECHO.
 
-:: --- input ---
-:: Essa linha evita erros em que a variável está vazia.
 SET userUM=Default
 SET /p userUM="|   O que deseja fazer?   |  %TIME:~0, -3%   > "
 
@@ -52,7 +48,6 @@ IF %userUM% EQU c ( GOTO diretoriosArquivos )
 IF %userUM% EQU 3 ( GOTO copy )
 IF %userUM% EQU 4 ( GOTO customCopy )
 
-:: ELSE...
 COLOR C
 COLOR F
 GOTO menu
@@ -71,7 +66,6 @@ ECHO.
 ECHO         Deixe o campo vazio caso nao queira alterar nada.
 ECHO.
 
-:: --- input ---
 SET /p origem="|   Redefinir a  origem   |  %TIME:~0, -3%   > "
 SET /p destino="|   Redefinir o destino   |  %TIME:~0, -3%   > "
 
@@ -87,7 +81,6 @@ COLOR a
 TITLE Copiadora de arquivos   I   SALVAR INFORMACOES DA ORIGEM
 ECHO.
 
-:: --- input ---
 SET nameUM=%random%.txt
 SET /p nameUM="|   Nome do arquivo   |  %TIME:~0, -3%   > "
 
@@ -153,7 +146,6 @@ ECHO     Destino dos arquivos:   [%destino%]
 ECHO.
 
 
-:: --- input ---
 SET userDOIS=s
 SET /p userDOIS="|   [S/n] Deseja copar as pastas vazias?   |  %TIME:~0, -3%   > "
 
@@ -187,7 +179,6 @@ ECHO         - Digite [10] para selecionar Campactados (zip, rar, tar, 7z).
 ECHO         - Digite [11] para PERSONALIZAR o tipo de arquivo.
 ECHO.
 
-:: --- input ---
 SET userTRES=Default
 SET /p userTRES="|   Deixe vazio para voltar ao menu...   |  %TIME:~0, -3%   > "
 
@@ -219,6 +210,5 @@ IF %userTRES% EQU 11 ( SET /p arquivos="Use os caracteres coringas do Windows pa
 
 ECHO.
 ECHO [O nome da pasta de destino foi registrado como %nome%]
-:: --- input ---
 SET /p nome="|   Deseja alterar isso?   |  %TIME:~0, -3%   > "
 GOTO copy
