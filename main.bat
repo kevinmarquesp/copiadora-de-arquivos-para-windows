@@ -10,6 +10,7 @@ SET nome=cp%random%
 
 
 
+
 :menu
 CLS
 TITLE Copiadora de arquivos   I   MENU PRINCIPAL
@@ -46,7 +47,12 @@ IF %userUM% EQU a ( GOTO diretoriosArquivos )
 IF %userUM% EQU b ( GOTO diretoriosArquivos )
 IF %userUM% EQU c ( GOTO diretoriosArquivos )
 
-IF %userUM% EQU 3 ( GOTO copy )
+IF %userUM% EQU 3 (
+	SET pastas=e
+	SET arquivos=*
+	SET nome=cp%random%
+	GOTO copy
+)
 IF %userUM% EQU 4 ( GOTO customCopy )
 
 :: ELSE...
@@ -130,7 +136,7 @@ GOTO menu
 :copy
 CLS
 COLOR a
-TITLE Copiadora de arquivos   I   COPIA PADRAO
+TITLE Copiadora de arquivos   I   COPIANDO
 ROBOCOPY %origem% %destino%/%nome% %arquivos% /%pastas%
 ECHO ------------------------------------ Precione qualquer tecla para continuar ---
 PAUSE >nul
@@ -159,6 +165,7 @@ IF %userDOIS% EQU N ( SET userDOIS=n )
 
 IF %userDOIS% EQU s (
 	ECHO [Configurado para COPIAR as pastas vazias!]
+	SET pastas=e
 ) ELSE (
 	ECHO [Configurado para NAO COPIAR as pastas vazias!]
 	SET pastas=s
@@ -169,14 +176,14 @@ ECHO.
 ECHO         - Digite [1] para selecionar TUDO.
 ECHO         - Digite [2] para selecionar Imagens (png, jpg, jpeg, gif, ico, svg, bmp).
 ECHO         - Digite [3] para selecionar Videos (mp4, avi, mkv, vmv, vma, mpg, mpeg, asf).
-ECHO         - Digite [4] para selecionar Musicas (mp3, wav, flaac, acc).
+ECHO         - Digite [4] para selecionar Musicas (mp3, wav, flaac, acc, m4a).
 ECHO         - Digite [5] para selecionar Textos (txt, md, docx, pdf, doc, docm).
 ECHO         - Digite [6] para selecionar arquivos Office (doc, docx, docm, xlsx, xlsm, xltx, pptx, pppsx, potx, accdb, mdb).
 ECHO             - Digite [A] para selecionar arquivos do Word (doc, docx, docm).
 ECHO             - Digite [B] para selecionar arquivos do Exel (xlsx, xlsm, xltx).
 ECHO             - Digite [C] para selecionar arquivos do Power Point (pptx, ppsx, potx).
 ECHO             - Digite [D] para selecionar arquivos do Acess (accdb, mdb).
-ECHO         - Digite [7] para selecionar arquivos Web (html, htm, php, js, aspx, css, cpp, py).
+ECHO         - Digite [7] para selecionar arquivos Web (html, htm, php, js, aspx, css, cpp, py, json).
 ECHO         - Digite [8] para selecionar arquivos de Design (psd, indd, pdf, svg, cdr, ai, aep, aepx, ppj).
 ECHO         - Digite [9] para selecionar arquivos do Sistema (dll, reg, jar, bat, vbs).
 ECHO         - Digite [10] para selecionar Campactados (zip, rar, tar, 7z).
@@ -188,10 +195,27 @@ SET userTRES=Default
 SET /p userTRES="|   Deixe vazio para voltar ao menu...   |  %TIME:~0, -3%   > "
 
 
-PAUSE >nul
-GOTO menu
+IF %userTRES% EQU Default ( GOTO menu )
 
+IF %userTRES% EQU 1 ( SET arquivos=* )
+IF %userTRES% EQU 2 ( SET arquivos=*.png *.jpg *.jpeg *.gif *.ico *.svg *.bmp )
+IF %userTRES% EQU 3 ( SET arquivos=*.mp4 *.avi *.mkv *.vmv *.vma *.mpg *.mpeg *.asf )
+IF %userTRES% EQU 4 ( SET arquivos=*.mp3 *.wav *.flaac *.acc *.m4a )
+IF %userTRES% EQU 5 ( SET arquivos=*.txt *.md *.docx *.pdf *.doc *.docm )
+IF %userTRES% EQU 6 ( SET arquivos=*.doc *.docx *.docm *.xlsx *.xlsm *.xltx *.pptx *.pppsx *.potx *.accdb *.mdb )
 
+IF %userTRES% EQU A ( SET userTRES=a )
+IF %userTRES% EQU B ( SET userTRES=b )
+IF %userTRES% EQU C ( SET userTRES=c )
+IF %userTRES% EQU D ( SET userTRES=d )
+IF %userTRES% EQU a ( SET arquivos=*.doc *.docx *.docm )
+IF %userTRES% EQU b ( SET arquivos=*.xlsx *.xlsm *.xltx )
+IF %userTRES% EQU c ( SET arquivos=*.pptx *.ppsx *.potx )
+IF %userTRES% EQU d ( SET arquivos=*.accdb *.mdb )
 
+IF %userTRES% EQU 7 ( SET arquivos=*.html *.htm *.php *.js *.aspx *.css *.cpp *.py *.json )
+IF %userTRES% EQU 8 ( SET arquivos=*.psd *.indd *.pdf *.svg *.cdr *.ai *.aep *.aepx *.ppj )
+IF %userTRES% EQU 9 ( SET arquivos=*.dll *.reg *.jar *.bat *.vbs )
+IF %userTRES% EQU 10 ( SET arquivos=*.zip *.rar *.tar *.7z )
 
-
+GOTO copy
