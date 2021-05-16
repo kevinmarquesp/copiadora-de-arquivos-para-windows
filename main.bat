@@ -3,7 +3,7 @@
 :: Variáveis principais.
 SET origem=%CD%
 SET destino=%CD%
-SET /a pastas=1
+SET pastas=e
 
 
 
@@ -130,7 +130,7 @@ GOTO menu
 CLS
 COLOR a
 TITLE Copiadora de arquivos   I   COPIA PADRAO
-ROBOCOPY %origem% %destino%/cps%random% * /e
+ROBOCOPY %origem% %destino%/cp%random% * /%pastas%
 ECHO ------------------------------------ Precione qualquer tecla para continuar ---
 PAUSE >nul
 GOTO menu
