@@ -46,7 +46,7 @@ IF %userUM% EQU b ( GOTO diretoriosArquivos )
 IF %userUM% EQU c ( GOTO diretoriosArquivos )
 
 IF %userUM% EQU 3 ( GOTO defaultCopy )
-IF %userUM% EQU 4 ( ECHO 4 )
+IF %userUM% EQU 4 ( GOTO customCopy )
 
 :: ELSE...
 COLOR C
@@ -132,5 +132,60 @@ COLOR a
 TITLE Copiadora de arquivos   I   COPIA PADRAO
 ROBOCOPY %origem% %destino%/cp%random% * /%pastas%
 ECHO ------------------------------------ Precione qualquer tecla para continuar ---
+PAUSE >nul
+GOTO menu
+
+
+
+
+
+:customCopy
+CLS
+TITLE Copiadora de arquivos   I   COPIA CUSTOMIZADA
+COLOR e
+ECHO.
+ECHO     Origem dos  arquivos:   [%origem%]
+ECHO     Destino dos arquivos:   [%destino%]
+ECHO.
+
+
+:: --- input ---
+SET userDOIS=s
+SET /p userDOIS="|   [S/n] Deseja copar as pastas vazias?   |  %TIME:~0, -3%   > "
+
+IF %userDOIS% EQU S ( SET userDOIS=s )
+IF %userDOIS% EQU N ( SET userDOIS=n )
+
+IF %userDOIS% EQU s (
+	ECHO [Configurado para COPIAR as pastas vazias!]
+) ELSE (
+	ECHO [Configurado para NAO COPIAR as pastas vazias!]
+	SET pastas=s
+)
+
+
+ECHO.
+ECHO         - Digite [1] para selecionar TUDO.
+ECHO         - Digite [2] para selecionar Imagens (png, jpg, jpeg, gif, ico, svg, bmp).
+ECHO         - Digite [3] para selecionar Videos (mp4, avi, mkv, vmv, vma, mpg, mpeg, asf).
+ECHO         - Digite [4] para selecionar Musicas (mp3, wav, flaac, acc).
+ECHO         - Digite [5] para selecionar Textos (txt, md, docx, pdf, doc, docm).
+ECHO         - Digite [6] para selecionar arquivos Office (doc, docx, docm, xlsx, xlsm, xltx, pptx, pppsx, potx, accdb, mdb).
+ECHO             - Digite [A] para selecionar arquivos do Word (doc, docx, docm).
+ECHO             - Digite [B] para selecionar arquivos do Exel (xlsx, xlsm, xltx).
+ECHO             - Digite [C] para selecionar arquivos do Power Point (pptx, ppsx, potx).
+ECHO             - Digite [D] para selecionar arquivos do Acess (accdb, mdb).
+ECHO         - Digite [7] para selecionar arquivos Web (html, htm, php, js, aspx, css, cpp, py).
+ECHO         - Digite [8] para selecionar arquivos de Design (psd, indd, pdf, svg, cdr, ai, aep, aepx, ppj).
+ECHO         - Digite [9] para selecionar arquivos do Sistema (dll, reg, jar, bat, vbs).
+ECHO         - Digite [10] para selecionar Campactados (zip, rar, tar, 7z).
+ECHO         - Digite [11] para PERSONALIZAR o tipo de arquivo.
+ECHO.
+
+:: --- input ---
+SET userTRES=Default
+SET /p userTRES="|   Deixe vazio para voltar ao menu...   |  %TIME:~0, -3%   > "
+
+
 PAUSE >nul
 GOTO menu
