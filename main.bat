@@ -86,7 +86,7 @@ SET /p nameUM="|   Nome do arquivo   |  %TIME:~0, -3%   > "
 
 DIR %origem% >%nameUM%
 ECHO ------------------------------------------------------------------------------- >>%nameUM%
-TREE /f %origem% >>%nameUM%
+TREE /f /a %origem% >>%nameUM%
 
 ECHO Informacoes salvas no arquivo %nameUM% com sucesso!
 ECHO.
