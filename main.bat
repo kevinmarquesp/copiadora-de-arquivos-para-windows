@@ -86,8 +86,7 @@ ECHO.
 SET nameUM=%random%.txt
 SET /p nameUM="|   Nome do arquivo   |  %TIME:~0, -3%   > "
 
-ECHO ------------------------------------------------------------------------------- >%nameUM%
-DIR %origem% >>%nameUM%
+DIR %origem% >%nameUM%
 ECHO ------------------------------------------------------------------------------- >>%nameUM%
 TREE /f %origem% >>%nameUM%
 
@@ -96,6 +95,9 @@ ECHO.
 
 PAUSE
 GOTO menu
+
+
+
 
 
 :diretoriosArquivos
