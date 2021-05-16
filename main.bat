@@ -3,6 +3,7 @@
 :: Variáveis principais.
 SET origem=%CD%
 SET destino=%CD%
+SET /a pastas=1
 
 
 
@@ -11,7 +12,7 @@ SET destino=%CD%
 :menu
 CLS
 TITLE Copiadora de arquivos   I   MENU PRINCIPAL
-COLOR F
+COLOR f
 ECHO.
 ECHO     Origem dos  arquivos:   [%origem%]
 ECHO     Destino dos arquivos:   [%destino%]
@@ -44,7 +45,7 @@ IF %userUM% EQU a ( GOTO diretoriosArquivos )
 IF %userUM% EQU b ( GOTO diretoriosArquivos )
 IF %userUM% EQU c ( GOTO diretoriosArquivos )
 
-IF %userUM% EQU 3 ( ECHO 3 )
+IF %userUM% EQU 3 ( GOTO defaultCopy )
 IF %userUM% EQU 4 ( ECHO 4 )
 
 :: ELSE...
@@ -78,7 +79,7 @@ GOTO menu
 
 :salvarInformacoes
 CLS
-COLOR A
+COLOR a
 TITLE Copiadora de arquivos   I   SALVAR INFORMACOES DA ORIGEM
 ECHO.
 
@@ -118,5 +119,18 @@ IF %userUM% EQU a (
 )
 ECHO ------------------------------------ Precione qualquer tecla para continuar ---
 
+PAUSE >nul
+GOTO menu
+
+
+
+
+
+:defaultCopy
+CLS
+COLOR a
+TITLE Copiadora de arquivos   I   COPIA PADRAO
+ROBOCOPY %origem% %destino%/cps%random% * /e
+ECHO ------------------------------------ Precione qualquer tecla para continuar ---
 PAUSE >nul
 GOTO menu
